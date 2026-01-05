@@ -1,61 +1,74 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import EmailIcon from "@mui/icons-material/Email";
+import SettingsIcon from "@mui/icons-material/Settings";
+import PersonIcon from "@mui/icons-material/Person";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { useState } from "react";
 
 export default function ButtonAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorElProfile, setAnchorElProfile] = useState(null);
 
-  const open = Boolean(anchorEl);
+  const openProfile = Boolean(anchorElProfile);
 
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleProfileOpen = (event) => {
+    setAnchorElProfile(event.currentTarget);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
+  const handleProfileClose = () => {
+    setAnchorElProfile(null);
   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" color="info">
         <Toolbar>
-          {/* MOBILE MENU ICON */}
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              onClick={handleMenuOpen}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Box>
-
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Femmecubator
+            Navbar
           </Typography>
 
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
-            <Button color="inherit">Listings</Button>
-            <Button color="inherit">Mentors</Button>
-            <Button color="inherit">My account</Button>
-            <Button color="inherit">Log Out</Button>
+          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
+            <Button color="inherit" startIcon={<EmailIcon />}>
+              Contact
+            </Button>
+
+            <Button color="inherit" startIcon={<SettingsIcon />}>
+              Settings
+            </Button>
+
+            <Button
+              color="inherit"
+              startIcon={<PersonIcon />}
+              endIcon={<ArrowDropDownIcon />}
+              onClick={handleProfileOpen}
+            >
+              Profile
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
 
-      <Menu anchorEl={anchorEl} open={open} onClose={handleMenuClose}>
-        <MenuItem onClick={handleMenuClose}>Listings</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Mentors</MenuItem>
-        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Log Out</MenuItem>
+      <Menu
+        anchorEl={anchorElProfile}
+        open={openProfile}
+        onClose={handleProfileClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <MenuItem onClick={handleProfileClose}>My account</MenuItem>
+        <MenuItem onClick={handleProfileClose}>Log out</MenuItem>
       </Menu>
     </Box>
   );
