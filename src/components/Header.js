@@ -81,7 +81,7 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       
-      if (window.scrollY > 50) {
+      if (window.scrollY > 250) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -102,7 +102,7 @@ export default function Header() {
           : "rgba(255, 255, 255, 0.08)",
         backdropFilter: "blur(12px)",
         borderBottom: scrolled
-          ? "1px solid rgba(0,0,0,0.1)"
+          ? "1px solid rgba(0,0,0,0.01)"
           : "1px solid rgba(255,255,255,0.1)",
         transition: "all 0.3s ease-in-out",
         color: scrolled ? "#fff" : "inherit",
@@ -110,13 +110,10 @@ export default function Header() {
     >
       <Toolbar>
         <Container
-          maxWidth={false}
-          disableGutters
           sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            maxWidth: "1400px",
           }}
         >
           <Link

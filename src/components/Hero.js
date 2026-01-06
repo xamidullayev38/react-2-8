@@ -25,16 +25,16 @@ export default function Hero() {
           pt: { xs: 10, md: 14 },
         }}
       >
-        <Container maxWidth={false} disableGutters sx={{ maxWidth: "1400px" }}>
+        <Container >
           <Box
             sx={{
               display: "grid",
               gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
               alignItems: "center",
-              gap: 15,
+              gap: 5,
             }}
           >
-            <Box maxWidth={560}>
+            <Box maxWidth={460}>
               <Typography
                 variant="h3"
                 sx={{
