@@ -110,13 +110,10 @@ export default function Header() {
     >
       <Toolbar>
         <Container
-          maxWidth={false}
-          disableGutters
           sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            maxWidth: "1400px",
           }}
         >
           <Link
