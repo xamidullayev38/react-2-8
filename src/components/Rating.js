@@ -11,36 +11,41 @@ import { grey } from "@mui/material/colors";
 const comments = [
   {
     id: 1,
+    name: "Jayvion  Simon",
+    role: "CEO",
+  },
+  {
+    id: 2,
     name: "Lucian  Obrien",
     role: "CTO",
   },
   {
-    id: 2,
+    id: 4,
     name: "Deja   Brady",
     role: "Project Cordinator",
   },
   {
-    id: 3,
+    id: 4,
     name: "Harrison   Stein",
     role: "Team Leader",
   },
   {
-    id: 4,
+    id: 5,
     name: "Reece Chung",
     role: "Software Developer",
   },
   {
-    id: 5,
+    id: 6,
     name: "Lainey Davidson",
     role: "Marketing Strategist",
   },
   {
-    id: 6,
+    id: 7,
     name: "Chrisopher Cardness",
     role: "Data Analyst",
   },
   {
-    id: 7,
+    id: 8,
     name: "Mealnie Noble",
     role: "Product Owner",
   },
@@ -50,7 +55,7 @@ export default function Rating() {
   const [swiper, setSwiper] = useState(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
-  
+
   return (
     <Box
       sx={{

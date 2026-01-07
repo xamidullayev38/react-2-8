@@ -8,6 +8,7 @@ import Categories from './components/Categories';
 import Connections from './components/Connections';
 import Recruiter from './components/Recruiter';
 import Rating from './components/Rating';
+import Clients from './components/Clients';
 
 export default function App() {
   return (
@@ -20,6 +21,8 @@ export default function App() {
       <Connections />
       <Recruiter />
       <Rating />
+      <Clients />
+
     </>
   )
 }
