@@ -6,6 +6,8 @@ import FeaturedJobs from './components/FeaturedJobs';
 import Companies from './components/Companies';
 import Categories from './components/Categories';
 import Connections from './components/Connections';
+import Recruiter from './components/Recruiter';
+import Rating from './components/Rating';
 
 export default function App() {
   return (
@@ -16,6 +18,8 @@ export default function App() {
       <Companies />
       <Categories />
       <Connections />
+      <Recruiter />
+      <Rating />
     </>
   )
 }
