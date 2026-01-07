@@ -60,9 +60,8 @@ export default function Clients() {
             },
           }}
         >
-          {/* 2 marta chiqaramiz */}
           {[...clients, ...clients].map((client, index) => (
-            <Box sx={{
+            <Box key={index} sx={{
                 border: '1px solid lightgrey',
                 borderRadius: '16px',
                 padding: '31px 45px'

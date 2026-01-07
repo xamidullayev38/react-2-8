@@ -15,7 +15,6 @@ import "swiper/css/pagination";
 
 import bgImg from "../assets/img/earth.png";
 
-// Namuna ma'lumotlar
 const connectionData = [
   {
     id: 1,
@@ -57,24 +56,48 @@ const connectionData = [
 
 export default function Connections() {
   return (
-    <Box sx={{ py: "120px", position: "relative", overflow: "hidden" }}>
+    <Box sx={{ 
+      py: { xs: "60px", md: "120px" }, 
+      position: "relative", 
+      overflow: "hidden" 
+    }}>
       <Container>
-        <Box sx={{ display: "flex", alignItems: "center", gap: "60px" }}>
+        <Box 
+          sx={{ 
+            display: "flex", 
+            // Mobilda ustma-ust (column), desktopda yonma-yon (row)
+            flexDirection: { xs: "column", md: "row" }, 
+            alignItems: { xs: "center", md: "center" },
+            gap: { xs: "40px", md: "60px" },
+            textAlign: { xs: "center", md: "left" }
+          }}
+        >
+          {/* Chap taraf: Matnlar qismi */}
           <Box
-            sx={{ minWidth: "365px", maxWidth: "365px", position: "relative" }}
+            sx={{ 
+              minWidth: { xs: "100%", md: "365px" }, 
+              maxWidth: { xs: "100%", md: "365px" }, 
+              position: "relative" 
+            }}
           >
             <Typography
               variant="h2"
               sx={{
                 fontWeight: "bold",
                 mb: "24px",
-                fontSize: "43px",
+                fontSize: { xs: "32px", md: "43px" }, // Mobilda shrift kichrayadi
                 lineHeight: "1.2",
               }}
             >
               Global <br /> connections
             </Typography>
-            <Typography sx={{ color: grey[600], mb: "40px", fontSize: "16px" }}>
+            <Typography sx={{ 
+              color: grey[600], 
+              mb: "40px", 
+              fontSize: "16px",
+              maxWidth: { xs: "400px", md: "100%" },
+              mx: { xs: "auto", md: 0 }
+            }}>
               Vestibulum fringilla pede sit amet augue. Nam adipiscing. Nulla
               neque dolor, sagittis eget, iaculis quis.
             </Typography>
@@ -88,44 +111,60 @@ export default function Connections() {
                 py: 1.5,
                 textTransform: "none",
                 fontWeight: 700,
+                width: { xs: "100%", sm: "auto" }, // Mobilda tugma eniga to'liq bo'ladi
                 "&:hover": { backgroundColor: "#454f5b" },
               }}
             >
               View all
             </Button>
 
-            <img
+            {/* Fon rasmi (Earth) - Mobilda kichrayadi yoki yashiriladi */}
+            <Box
+              component="img"
               src={bgImg}
               alt=""
-              style={{
+              sx={{
                 position: "absolute",
-                left: "-50px",
+                left: { xs: "-20px", md: "-50px" },
+                top: { xs: "-20px", md: "0" },
+                width: { xs: "150px", md: "auto" },
                 zIndex: "-1",
+                opacity: { xs: 0.5, md: 1 }
               }}
             />
           </Box>
 
-          <Box sx={{ flexGrow: 1, minWidth: 0 }}>
+          {/* O'ng taraf: Slayder qismi */}
+          <Box sx={{ 
+            width: "100%", // Mobilda to'liq eni
+            flexGrow: 1, 
+            minWidth: 0 // Swiper buzilib ketmasligi uchun shart
+          }}>
             <Swiper
               modules={[Pagination, Autoplay]}
               spaceBetween={24}
               slidesPerView={1}
               autoplay={{ delay: 3000 }}
               breakpoints={{
+                // 0px dan 640px gacha: 1.2 ta slayder (keyingisi ko'rinib turishi uchun)
+                0: { slidesPerView: 1.2, spaceBetween: 16 },
+                // 640px dan yuqori: 2 ta slayder
                 640: { slidesPerView: 2 },
-                1024: { slidesPerView: 2.5 }, // Yarimta karta keyingisi borligini bildiradi
+                // 1024px dan yuqori: 2.5 ta slayder
+                1024: { slidesPerView: 2.5 },
               }}
               pagination={{ clickable: true }}
-              style={{ paddingBottom: "50px" }} // Nuqtalar uchun joy
+              style={{ paddingBottom: "60px" }}
             >
-              {connectionData.map((item) => (
-                <SwiperSlide key={item.id}>
+              {connectionData.map((item, index) => (
+                <SwiperSlide key={index}>
                   <Card
                     elevation={0}
                     sx={{
                       borderRadius: "16px",
                       border: "1px solid #f0f0f0",
                       transition: "0.3s",
+                      height: "100%",
                       "&:hover": { boxShadow: "0 12px 24px rgba(0,0,0,0.1)" },
                     }}
                   >
@@ -134,7 +173,7 @@ export default function Connections() {
                       src={item.img}
                       sx={{
                         width: "100%",
-                        height: "280px",
+                        height: { xs: "200px", md: "280px" }, // Mobilda rasm balandligi kichrayadi
                         objectFit: "cover",
                       }}
                     />

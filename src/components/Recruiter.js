@@ -8,7 +8,7 @@ export default function Recruiter() {
     <Box
       sx={{
         width: "100%",
-        py: "80px",
+        py: { xs: "60px", md: "80px" }, // Mobilda biroz kichikroq padding
         background: "#04000E",
       }}
     >
@@ -16,11 +16,19 @@ export default function Recruiter() {
         <Box
           sx={{
             display: "flex",
+            // Mobilda ustma-ust (column), desktopda yonma-yon (row)
+            flexDirection: { xs: "column", md: "row" },
             alignItems: "center",
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            textAlign: { xs: "center", md: "left" }, // Mobilda matnni o'rtaga olish
+            gap: { xs: 5, md: 0 }
           }}
         >
-          <Box width={"466px"}>
+          {/* Matn qismi */}
+          <Box sx={{ 
+            width: "100%", 
+            maxWidth: { xs: "100%", md: "466px" } // Qat'iy 466px o'rniga maxWidth
+          }}>
             <Typography
               sx={{ color: "#FA541C" }}
               fontSize={14}
@@ -33,12 +41,12 @@ export default function Recruiter() {
             </Typography>
             <Typography
               fontWeight={"bold"}
-              fontSize={44}
+              fontSize={{ xs: 32, md: 44 }} // Mobilda shrift kichrayadi
               sx={{ color: "white", textWrap: "balance" }}
             >
               Do you have a position to post job?
             </Typography>
-            <Typography color={grey[500]} mt={3} mb={8}>
+            <Typography color={grey[500]} mt={3} mb={{ xs: 4, md: 8 }}>
               Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi.
               Morbi mattis ullamcorper velit.
             </Typography>
@@ -47,6 +55,11 @@ export default function Recruiter() {
                 bgcolor: "#FA541C",
                 color: "white",
                 textTransform: "capitalize",
+                px: 4,
+                py: 1.5,
+                borderRadius: '8px',
+                width: { xs: "100%", sm: "auto" }, // Mobilda tugma to'liq kenglikda
+                "&:hover": { bgcolor: "#e44310" },
               }}
               variant="contained"
               startIcon={<UploadFileIcon />}
@@ -56,9 +69,25 @@ export default function Recruiter() {
             </Button>
           </Box>
 
-          {/* right part */}
-          <Box>
-            <img src={recruiterImg} alt="recruiterImg" />
+          {/* Rasm qismi */}
+          <Box 
+            sx={{ 
+              width: "100%", 
+              maxWidth: { xs: "300px", md: "500px" }, // Mobilda rasm kichrayadi
+              display: "flex",
+              justifyContent: "center"
+            }}
+          >
+            <Box
+              component="img"
+              src={recruiterImg}
+              alt="recruiterImg"
+              sx={{
+                width: "100%",
+                height: "auto",
+                objectFit: "contain"
+              }}
+            />
           </Box>
         </Box>
       </Container>

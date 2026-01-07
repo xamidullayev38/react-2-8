@@ -22,26 +22,32 @@ export default function Hero() {
           background:
             "radial-gradient(circle at left, rgba(249,115,22,0.15), transparent 40%), linear-gradient(90deg, #05010d 0%, #020617 50%, #05010d 100%)",
           color: "#fff",
-          pt: { xs: 10, md: 14 },
+          pt: { xs: 12, md: 14 }, 
+          pb: { xs: 8, md: 0 },
         }}
       >
-        <Container >
-          <Box
+        <Container>
+          <Box 
             sx={{
               display: "grid",
               gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
               alignItems: "center",
-              gap: 5,
+              gap: { xs: 5, md: 2 },
             }}
           >
-            <Box maxWidth={460}>
+            <Box
+              sx={{
+                maxWidth: { xs: "100%", md: 460 },
+                textAlign: { xs: "center", md: "left" },
+              }}
+            >
               <Typography
                 variant="h3"
                 sx={{
                   fontWeight: 800,
+                  fontSize: { xs: "2.5rem", md: "3.5rem" }, 
                   lineHeight: 1.15,
                   mb: 3,
-                  textAlign: "center",
                 }}
               >
                 Get the{" "}
@@ -63,7 +69,9 @@ export default function Hero() {
                 sx={{
                   color: "rgba(255,255,255,0.7)",
                   mb: 4,
-                  textAlign: "center",
+                  fontSize: { xs: "0.95rem", md: "1rem" },
+                  maxWidth: { xs: "100%", md: 400 },
+                  mx: { xs: "auto", md: 0 }, 
                 }}
               >
                 Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum
@@ -73,34 +81,40 @@ export default function Hero() {
               <Box
                 sx={{
                   display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
                   alignItems: "center",
                   backgroundColor: "#fff",
-                  borderRadius: "12px",
-                  p: 0.5,
+                  borderRadius: { xs: "16px", sm: "12px" },
+                  p: 0.8,
                   width: "100%",
                   maxWidth: "650px",
                   border: "1px solid #eee",
-                  boxShadow: "0px 2px 10px rgba(0,0,0,0.05)",
                   mb: 3,
+                  gap: { xs: 1, sm: 0 },
                 }}
               >
                 <TextField
-                  placeholder="Job title, keyword..."
+                  placeholder="Job title..."
                   variant="standard"
                   InputProps={{
                     disableUnderline: true,
                     startAdornment: (
                       <InputAdornment position="start" sx={{ ml: 1 }}>
-                        <SearchIcon sx={{ color: "#999", fontSize: "20px" }} />
+                        <SearchIcon sx={{ color: "#999" }} />
                       </InputAdornment>
                     ),
-                    style: { fontSize: "14px" }, 
                   }}
-                  sx={{ flex: 1.5 }}
+                  sx={{ flex: 1.5, width: "100%", px: 1 }}
                 />
 
+              
                 <Box
-                  sx={{ width: "1px", height: "24px", backgroundColor: "#eee" }}
+                  sx={{
+                    width: "1px",
+                    height: "24px",
+                    backgroundColor: "#eee",
+                    display: { xs: "none", sm: "block" },
+                  }}
                 />
 
                 <TextField
@@ -110,62 +124,63 @@ export default function Hero() {
                     disableUnderline: true,
                     startAdornment: (
                       <InputAdornment position="start" sx={{ ml: 1 }}>
-                        <LocationOnIcon
-                          sx={{ color: "#999", fontSize: "20px" }}
-                        />
+                        <LocationOnIcon sx={{ color: "#999" }} />
                       </InputAdornment>
                     ),
-                    style: { fontSize: "14px" },
                   }}
-                  sx={{ flex: 1 }}
+                  sx={{ flex: 1, width: "100%", px: 1 }}
                 />
 
                 <Button
                   variant="contained"
+                  fullWidth={{ xs: true, sm: false }} 
                   sx={{
-                    minWidth: "45px", 
-                    height: "45px",
+                    minWidth: { xs: "100%", sm: "48px" },
+                    height: "48px",
                     backgroundColor: "#f97316",
                     borderRadius: "10px",
-                    ml: 1,
-                    "&:hover": {
-                      backgroundColor: "#ea580c",
-                    },
+                    "&:hover": { backgroundColor: "#ea580c" },
                   }}
                 >
-                  <SearchIcon sx={{ fontSize: "22px" }} />
+                  <SearchIcon />
                 </Button>
               </Box>
 
               <Box
                 sx={{
                   display: "flex",
-                  gap: 4,
-                  opacity: 0.7,
-                  mb: 5,
+                  gap: { xs: 3, md: 5 },
+                  flexWrap: "wrap", 
+                  justifyContent: { xs: "center", md: "flex-start" },
                 }}
               >
-                <img src={companies} alt="" />
-              </Box>
-
-              <Box sx={{ display: "flex", gap: 6 }}>
                 <Stat value="2m+" label="Jobs" />
-                <Stat value="500k+" label="Successful hiring" />
+                <Stat value="500k+" label="Hiring" />
                 <Stat value="250k+" label="Partners" />
-                <Stat value="156k+" label="Employee" />
               </Box>
             </Box>
 
-            {/* RIGHT (siz o‘zingiz qilasiz) */}
             <Box
               sx={{
                 width: "100%",
-                height: 600,
-                overflow: "hidden",
-                display: { xs: "none", md: "block" },
+                display: { xs: "none", md: "flex" }, 
               }}
             >
-              <img src={heroImg} alt="" />
+              <Box
+                component="img"
+                src={heroImg}
+                alt="Hero"
+                sx={{
+                  width: "100%",
+                  maxWidth: 600,
+                  height: "auto",
+                  animation: "float 6s ease-in-out infinite", 
+                  "@keyframes float": {
+                    "0%, 100%": { transform: "translateY(0)" },
+                    "50%": { transform: "translateY(-20px)" },
+                  },
+                }}
+              />
             </Box>
           </Box>
         </Container>
