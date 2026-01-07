@@ -39,6 +39,7 @@ export default function FeaturedJobs() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "start",
+          flexWrap: 'wrap'
         }}
       >
         <Typography fontSize={24} color={grey[600]} textTransform={"uppercase"}>
@@ -53,7 +54,6 @@ export default function FeaturedJobs() {
       </Box>
 
 
-      {/* grid */}
 
       <Grid container spacing={3} sx={{py: '80px',}}>
           {jobData.map((job) => (

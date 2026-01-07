@@ -9,6 +9,10 @@ import Connections from './components/Connections';
 import Recruiter from './components/Recruiter';
 import Rating from './components/Rating';
 import Clients from './components/Clients';
+import Blog from './components/Blog';
+import Advert from './components/Advert';
+import Subscribe from './components/Subscribe';
+import Footer from './components/Footer';
 
 export default function App() {
   return (
@@ -22,7 +26,10 @@ export default function App() {
       <Recruiter />
       <Rating />
       <Clients />
-
+      <Blog />
+      <Advert />
+      <Subscribe />
+      <Footer />
     </>
   )
 }

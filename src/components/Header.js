@@ -1,12 +1,27 @@
-import { AppBar, Button, Container, Link, Toolbar } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { darkBg } from "./color";
+import {
+  AppBar,
+  Button,
+  Container,
+  Link,
+  Toolbar,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Box,
+  useMediaQuery,
+  useTheme,
+  Typography,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu"; // Burger icon
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import SearchIcon from "@mui/icons-material/Search";
-import AbcIcon from "@mui/icons-material/Abc";
 import SettingsIcon from "@mui/icons-material/Settings";
 import styled from "@emotion/styled";
 
+// --- Sizning Styled Komponentlaringiz (o'zgarishsiz qoladi) ---
 const ButtonPurchase = styled.button`
   position: relative;
   padding: 4px 12px;
@@ -18,7 +33,7 @@ const ButtonPurchase = styled.button`
   border: none;
   cursor: pointer;
   z-index: 1;
-
+  transition: all 0.3s ease;
   &::before {
     content: "";
     position: absolute;
@@ -32,7 +47,6 @@ const ButtonPurchase = styled.button`
     mask-composite: exclude;
     z-index: -1;
   }
-
   &::after {
     content: "";
     position: absolute;
@@ -43,17 +57,13 @@ const ButtonPurchase = styled.button`
     opacity: 0.35;
     z-index: -2;
   }
-
   &:hover {
     transform: translateY(-2px);
   }
-
-  transition: all 0.3s ease;
 `;
 
 const RotatingSettingsIcon = styled(SettingsIcon)`
   animation: spin 8s linear infinite;
-
   @keyframes spin {
     from {
       transform: rotate(0deg);
@@ -69,7 +79,6 @@ const NavLink = styled(Link)`
   font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
-
   &:hover {
     color: #ffffff;
   }
@@ -77,104 +86,148 @@ const NavLink = styled(Link)`
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md")); // Planshet va telefonda true bo'ladi
 
   useEffect(() => {
     const handleScroll = () => {
-      
-      if (window.scrollY > 250) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
 
-  return (
-    <AppBar
-      elevation={0}
+  const drawer = (
+    <Box
       sx={{
-        backgroundColor: scrolled
-          ? "rgba(22, 28, 36, 0.95)"
-          : "rgba(255, 255, 255, 0.08)",
-        backdropFilter: "blur(12px)",
-        borderBottom: scrolled
-          ? "1px solid rgba(0,0,0,0.01)"
-          : "1px solid rgba(255,255,255,0.1)",
-        transition: "all 0.3s ease-in-out",
-        color: scrolled ? "#fff" : "inherit",
+        width: 250,
+        bgcolor: "#161C24",
+        height: "100%",
+        color: "white",
+        p: 2,
       }}
     >
-      <Toolbar>
-        <Container
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Link
-            textTransform={"uppercase"}
-            underline="none"
+      <Typography variant="h6" sx={{ mb: 2 }}>
+        ZONE.
+      </Typography>
+      <List>
+        {["Home", "Components", "Pages", "Docs"].map((text) => (
+          <ListItem button key={text} onClick={handleDrawerToggle}>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
+  return (
+    <>
+      <AppBar
+        elevation={0}
+        sx={{
+          backgroundColor: scrolled ? "rgba(22, 28, 36, 0.95)" : "transparent",
+          backdropFilter: scrolled ? "blur(12px)" : "none",
+          borderBottom: "1px solid rgba(255,255,255,0.1)",
+          transition: "all 0.3s ease-in-out",
+        }}
+      >
+        <Toolbar>
+          <Container
             sx={{
-              fontSize: 24,
-              fontWeight: 800,
-              color: "#fff",
               display: "flex",
+              justifyContent: "space-between",
               alignItems: "center",
-              gap: "6px",
             }}
           >
-            Zone
-            <span
-              style={{
-                width: 8,
-                height: 8,
-                backgroundColor: "#f97316",
-                borderRadius: "50%",
-                display: "inline-block",
+            <Link
+              underline="none"
+              sx={{
+                fontSize: 24,
+                fontWeight: 800,
+                color: "#fff",
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
               }}
-            />
-          </Link>
-          <div className="d-flex align-items-center gap-3">
-            <NavLink fontSize={18} href="#" color="inherit" underline="none">
-              Home
-            </NavLink>
-            <NavLink fontSize={18} href="#" color="inherit" underline="none">
-              Components
-            </NavLink>
-            <Button
-              sx={{ textTransform: "none",color:'white' }}
-              endIcon={<ArrowDropDownIcon />}
             >
-              Pages
-            </Button>
-            <NavLink fontSize={18} href="#" color="inherit" underline="none">
-              Docs
-            </NavLink>
-          </div>
-          <div className="d-flex align-items-center gap-2">
-            <Button sx={{color:'white'}}>
-              <SearchIcon />
-            </Button>
+              Zone{" "}
+              <Box
+                component="span"
+                sx={{
+                  width: 8,
+                  height: 8,
+                  bgcolor: "#f97316",
+                  borderRadius: "50%",
+                }}
+              />
+            </Link>
 
-            <img
-              src="https://flagcdn.com/w20/gb.png"
-              alt="EN"
-              style={{ width: 20, height: 14 }}
-            />
+            <Box
+              sx={{
+                display: { xs: "none", md: "flex" },
+                alignItems: "center",
+                gap: 3,
+              }}
+            >
+              <NavLink href="#">Home</NavLink>
+              <NavLink href="#">Components</NavLink>
+              <Button
+                sx={{ textTransform: "none", color: "white" }}
+                endIcon={<ArrowDropDownIcon />}
+              >
+                Pages
+              </Button>
+              <NavLink href="#">Docs</NavLink>
+            </Box>
 
-            <Button  sx={{color:'white'}}>
-              <RotatingSettingsIcon />
-            </Button>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <IconButton sx={{ color: "white" }}>
+                <SearchIcon />
+              </IconButton>
 
-            <ButtonPurchase>Purchase</ButtonPurchase>
-          </div>
-        </Container>
-      </Toolbar>
-    </AppBar>
+              <Box
+                component="img"
+                src="https://flagcdn.com/w20/gb.png"
+                alt="EN"
+                sx={{ width: 20, height: 14, cursor: "pointer", mx: 1 }}
+              />
+
+              <IconButton sx={{ color: "white" }}>
+                <RotatingSettingsIcon />
+              </IconButton>
+
+              <ButtonPurchase
+                sx={{ display: { xs: "none", sm: "block" }, ml: 1 }}
+              >
+                Purchase
+              </ButtonPurchase>
+
+              <IconButton
+                color="inherit"
+                onClick={handleDrawerToggle}
+                sx={{ ml: 1, display: { md: "none" } }}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Box>
+          </Container>
+        </Toolbar>
+      </AppBar>
+
+      <Drawer
+        anchor="right"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        sx={{ "& .MuiDrawer-paper": { bgcolor: "#161C24" } }}
+      >
+        {drawer}
+      </Drawer>
+    </>
   );
 }

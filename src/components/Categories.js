@@ -65,9 +65,9 @@ export default function Categories() {
         </Typography>
       </Box>
       <Box>
-        <Grid container spacing={4}>
+        <Grid container spacing={4} justifyContent={'center'}>
           {categories.map((item, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
+            <Grid item xs={12} sm={6} md={3} key={index} >
               <Card
                 elevation={0}
                 sx={{
